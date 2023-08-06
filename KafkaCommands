@@ -1,0 +1,39 @@
+// Run Zookeeper
+.\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
+
+// Run Kafka
+.\bin\windows\kafka-server-start.bat .\config\server.properties
+
+// Create a topic
+.\bin\windows\kafka-topics.bat --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic javainusetopic
+
+
+// Consume from the topic
+.\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic javainusetopic --from-beginning
+
+// Produce to the topic
+.\bin\windows\kafka-console-producer.bat --broker-list localhost:9092 --topic javainusetopic
+
+// List all topics
+.\bin\windows\kafka-topics.bat --list --bootstrap-server localhost:9092
+
+// Describe a topic
+.\bin\windows\kafka-topics.bat --describe --bootstrap-server localhost:9092 --topic javainusetopic
+
+// Delete a topic
+.\bin\windows\kafka-topics.bat --delete --bootstrap-server localhost:9092 --topic javainusetopic
+
+// Alter a topic
+.\bin\windows\kafka-topics.bat --alter --bootstrap-server localhost:9092 --topic javainusetopic --partitions 2
+
+// List consumer groups
+.\bin\windows\kafka-consumer-groups.bat --bootstrap-server localhost:9092 --list
+
+// Describe a consumer group
+.\bin\windows\kafka-consumer-groups.bat --bootstrap-server localhost:9092 --describe --group javainuse-consumer-group
+
+// Delete a consumer group
+.\bin\windows\kafka-consumer-groups.bat --bootstrap-server localhost:9092 --delete --group javainuse-consumer-group
+
+// Reset offsets for a consumer group
+.\bin\windows\kafka-consumer-groups.bat --bootstrap-server localhost:9092 --group javainuse-consumer-group --reset-offsets --to-earliest --execute --topic javainusetopic
