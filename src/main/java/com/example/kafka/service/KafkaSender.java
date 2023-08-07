@@ -25,7 +25,7 @@ public class KafkaSender {
 
 	public void sendJson(Employee emp) {
 		System.out.println(String.format("#### -> Producing message -> %s", emp));
-		this.kafkaTemplate.send(TOPIC2, emp.toString());
+		this.kafkaTemplate.send(TOPIC, emp.toString());
 	}
 }
 

@@ -3,9 +3,7 @@ package com.example.kafka.controller;
 import com.example.kafka.dto.Employee;
 import com.example.kafka.service.KafkaSender;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class ApacheKafkaWebController {
@@ -24,9 +22,11 @@ public class ApacheKafkaWebController {
         return "Message sent to the Kafka Topic java_in_use_topic Successfully";
     }
 //Kafka producer with JSON message
-     @GetMapping("/kafka/produceJson")
-        public String produceJson(@RequestParam("emp") Employee emp) {
-            this.kafkaSender.sendJson(emp);
+     @PostMapping("/kafka/produceJson")
+        public String produceJson(@RequestBody  Employee employee) {
+            this.kafkaSender.sendJson(employee);
             return "Message sent to the Kafka Topic java_in_use_topic Successfully";
         }
+
+
 }
